@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: uml
+# key: uml_
+# --
+#+begin_src plantuml :file $0
+$1
+#+end_src
