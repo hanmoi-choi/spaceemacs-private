@@ -1,7 +1,10 @@
+
 (eval-after-load 'org
   '(progn
      ;;Leader
      (evil-leader/set-key-for-mode 'org-mode
+       "mp" 'ded/org-show-previous-heading-tidily
+       "mn" 'ded/org-show-next-heading-tidily
        "m'" 'org-edit-special
        "md" 'org-deadline
        "me" 'org-export-dispatch

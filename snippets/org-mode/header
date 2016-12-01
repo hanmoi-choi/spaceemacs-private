@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: header
+# key: header_
+# --
+#+TITLE: $1
+#+AUTHOR: Hanmoi Daniel Choi
+#+EMAIL: forhim185@gmail.com
+#+OPTIONS: H:3 num:nil \n:nil @:t ::t |:t ^:{} _:{} *:t toc:nil
+#+FILETAGS: $2
+$3

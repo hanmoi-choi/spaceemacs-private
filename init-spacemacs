@@ -7,15 +7,8 @@
 You should not put any user code in this function besides modifying the variable
 values."
   (setq-default
-   ;; Base distribution to use. This is a layer contained in the directory
-   ;; `+distribution'. For now available distributions are `spacemacs-base'
-   ;; or `spacemacs'. (default 'spacemacs)
    dotspacemacs-distribution 'spacemacs
-   ;; List of additional paths where to look for configuration layers.
-   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
-   ;; List of configuration layers to load. If it is the symbol `all' instead
-   ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers '(
                                        ;; Checkers
                                        spell-checking
@@ -26,14 +19,13 @@ values."
                                         :variables
                                         auto-completion-enable-sort-by-usage t
                                         auto-completion-enable-snippets-in-popup t
-                                        auto-completion-private-snippets-directory "~/.emacs.d/snippets"
+                                        auto-completion-private-snippets-directory "~/.emacs.d/private/snippets"
                                         auto-completion-return-key-behavior 'complete
                                         auto-completion-tab-key-behavior 'cycle)
                                        helm
 
                                        ;; Emacs
                                        better-defaults
-                                       ibuffer
                                        (ibuffer
                                         :variables
                                         ibuffer-group-buffers-by 'projects)
@@ -44,13 +36,11 @@ values."
 
                                        ;; Lang
                                        (clojure :variables clojure-enable-fancify-symbols t)
-                                       csharp
                                        csv
                                        emacs-lisp
                                        graphviz
                                        haskell
                                        html
-                                       java
                                        javascript
                                        (markdown
                                         :variables
@@ -68,14 +58,12 @@ values."
                                        nlinum
                                        osx
                                        git
-                                       github
                                        (version-control :variables
                                                         version-control-diff-tool 'git-gutter
                                                         version-control-global-margin t)
 
                                        ;; Tools
                                        docker
-                                       nginx
                                        pdf-tools
                                        shell
                                        imenu-list
@@ -87,11 +75,10 @@ values."
                                        ;; Vim
                                        evil-cleverparens
                                        evil-commentary
-                                       evil-snipe
                                        vinegar
 
                                        daniel-core
-                                       ;; daniel-org
+                                       daniel-org
                                        daniel-util)
 
    ;; js2-mode
@@ -116,7 +103,7 @@ values."
                                     git-gutter
                                     git-gutter-fringe
                                     git-gutter-fringe+
-
+                                    org
                                     evil-numbers
                                     doc-view
                                     evil-mc
@@ -268,7 +255,7 @@ values."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("ag" "ack" "pt" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
@@ -317,6 +304,12 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (progn
+
+    (setq deft-extensions '("txt" "md" "org" "markdown"))
+    (setq deft-recursive t)
+    (setq deft-use-filename-as-title t)
+    (setq deft-directory "~/Box Sync/org")
+
     (if (eq system-type 'darwin)
         (setq mode-icons--directory "/Users/daniel.choi/.emacs.d/private/")
       (setq mode-icons--directory "/home/danielc/.emacs.d/private/"))
@@ -441,7 +434,7 @@ layers configuration. You are free to put any user code."
         (mode . lisp-mode)))))))
  '(package-selected-packages
    (quote
-    (iedit auto-complete yasnippet multiple-cursors eclim inf-ruby enh-ruby-mode vmd-mode ox-reveal ox-gfm deft org-projectile org-present alert log4e gntp org-download mode-icons tabbar clang-format redshank list-utils edbi epc ctable concurrent deferred imenu-list pug-mode xterm-color spaceline rubocop puml-mode persp-mode neotree magit-gh-pulls highlight-indentation helm-company helm-ag evil-unimpaired evil-commentary dumb-jump docker column-enforce-mode clojure-snippets aggressive-indent cider anzu smartparens undo-tree ivy flyspell-correct ht helm helm-core haskell-mode flycheck magit git-commit async js2-mode yaml-mode ws-butler with-editor window-numbering which-key web-mode web-beautify volatile-highlights vlf vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tagedit tabbar-ruler sx sql-indent spacemacs-theme smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rspec-mode robe reveal-in-osx-finder restclient restart-emacs rbenv rainbow-delimiters queue quelpa projectile-rails powershell popwin plantuml-mode pdf-tools pbcopy paradox osx-trash osx-dictionary orgit org-pomodoro org-plus-contrib org-bullets open-junk-file omnisharp nlinum-relative nginx-mode mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode link-hint less-css-mode launchctl json-mode js2-refactor js-doc jade-mode intero info+ indent-guide ido-vertical-mode ibuffer-projectile hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-ls-git helm-hoogle helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-chrome helm-c-yasnippet haskell-snippets graphviz-dot-mode google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter+ gist gh-md ggtags flyspell-correct-helm flycheck-pos-tip flycheck-haskell flx-ido find-file-in-project fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-terminal-cursor-changer evil-surround evil-snipe evil-search-highlight-persist evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help emr emmet-mode elisp-slime-nav dockerfile-mode docker-tramp diff-hl dactyl-mode csv-mode company-web company-tern company-statistics company-ghci company-ghc company-emacs-eclim company-cabal coffee-mode cmm-mode clj-refactor cliphist clean-aindent-mode cider-eval-sexp-fu chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (rake hydra inflections seq spinner request skewer-mode magit-popup pcre2el powerline org clojure-mode highlight projectile company gh csharp-mode dash iedit auto-complete yasnippet multiple-cursors eclim inf-ruby enh-ruby-mode vmd-mode ox-reveal ox-gfm deft org-projectile org-present alert log4e gntp org-download mode-icons tabbar clang-format redshank list-utils edbi epc ctable concurrent deferred imenu-list pug-mode xterm-color spaceline rubocop puml-mode persp-mode neotree magit-gh-pulls highlight-indentation helm-company helm-ag evil-unimpaired evil-commentary dumb-jump docker column-enforce-mode clojure-snippets aggressive-indent cider anzu smartparens undo-tree ivy flyspell-correct ht helm helm-core haskell-mode flycheck magit git-commit async js2-mode yaml-mode ws-butler with-editor window-numbering which-key web-mode web-beautify volatile-highlights vlf vimrc-mode vi-tilde-fringe uuidgen use-package toc-org tagedit tabbar-ruler sx sql-indent spacemacs-theme smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rspec-mode robe reveal-in-osx-finder restclient restart-emacs rbenv rainbow-delimiters queue quelpa projectile-rails powershell popwin plantuml-mode pdf-tools pbcopy paradox osx-trash osx-dictionary orgit org-pomodoro org-plus-contrib org-bullets open-junk-file omnisharp nlinum-relative nginx-mode mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode link-hint less-css-mode launchctl json-mode js2-refactor js-doc jade-mode intero info+ indent-guide ido-vertical-mode ibuffer-projectile hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-ls-git helm-hoogle helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-chrome helm-c-yasnippet haskell-snippets graphviz-dot-mode google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter+ gist gh-md ggtags flyspell-correct-helm flycheck-pos-tip flycheck-haskell flx-ido find-file-in-project fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-terminal-cursor-changer evil-surround evil-snipe evil-search-highlight-persist evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help emr emmet-mode elisp-slime-nav dockerfile-mode docker-tramp diff-hl dactyl-mode csv-mode company-web company-tern company-statistics company-ghci company-ghc company-emacs-eclim company-cabal coffee-mode cmm-mode clj-refactor cliphist clean-aindent-mode cider-eval-sexp-fu chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(powershell-indent 2)
  '(send-mail-function (quote smtpmail-send-it))
  '(standard-indent 2))

@@ -33,7 +33,7 @@
 (defun daniel-tramp/init-tramp ()
   (progn
     (require 'tramp)
-    (setq explicit-shell-file-name "/bin/bash")
+    (setq explicit-shell-file-name "/usr/local/bin/bash")
     (setq tramp-default-method "ssh")
     (setq tramp-verbose 1)
     ;; This is important, or with fancy shell, tramp will not work

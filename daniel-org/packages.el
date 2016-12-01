@@ -12,7 +12,6 @@
 
 (setq daniel-org-packages
       '(
-        company
         gnuplot
         htmlize
         ;; org is installed by `org-plus-contrib'
@@ -20,14 +19,8 @@
         (org-plus-contrib :step pre)
         ;; org-mime is installed by `org-plus-contrib'
         (org-mime :location built-in)
-        org-pomodoro
         plantuml-mode
         toc-org))
-
-(when (configuration-layer/layer-usedp 'auto-completion)
-  (defun org/post-init-company ()
-    (spacemacs|add-company-hook org-mode)
-    (push 'company-capf company-backends-org-mode)))
 
 (defun daniel-org/init-plantuml-mode ()
   (use-package plantuml-mode
@@ -68,7 +61,7 @@
 
       ;; STARTUP
       (setq org-startup-indented t      ;indent heading at start
-            org-startup-folded 'content) ;folded content
+            org-startup-folded nil) ;folded content
 
       (setq org-cycle-include-plain-lists 'integrate
             org-log-done t)
@@ -86,9 +79,6 @@
 
       (eval-after-load 'org-indent
         '(spacemacs|hide-lighter org-indent-mode))
-
-      (let ((dir (configuration-layer/get-layer-property 'daniel-org :dir)))
-        (setq org-export-async-init-file (concat dir "org-async-init.el")))
 
       (font-lock-add-keywords
        'org-mode '(("\\(@@html:<kbd>@@\\) \\(.*\\) \\(@@html:</kbd>@@\\)"
@@ -128,8 +118,6 @@
       (setq org-babel-clojure-backend 'cider)
       (setq org-babel-haskell-backend 'ghc)
 
-      ;; Get this from https://raw.github.com/chenfengyuan/elisp/master/next-spec-day.el
-      (load (concat vendor-directory "next-spec-day.el") t)
       ;;;;;;;;;;;;;;
       ;; HTMLIZE
       ;;;;;;;;;;;;;;
@@ -409,16 +397,6 @@ SCHEDULED: %^t
         "mM" 'org-mime-htmlize)
       (evil-leader/set-key-for-mode 'org-mode
         "mm" 'org-mime-org-buffer-htmlize))))
-
-(defun daniel-org/init-org-pomodoro ()
-  (use-package org-pomodoro
-    :defer t
-    :init
-    (progn
-      (when (spacemacs/system-is-mac)
-        (setq org-pomodoro-audio-player "/usr/bin/afplay"))
-      (evil-leader/set-key-for-mode 'org-mode
-        "mp" 'org-pomodoro))))
 
 (defun daniel-org/init-toc-org ()
   (use-package toc-org

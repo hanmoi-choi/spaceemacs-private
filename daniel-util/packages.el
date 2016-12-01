@@ -6,15 +6,9 @@
         multiple-cursors
         emr
         cliphist
-        pdf-tools
         sx
-        docker
         helm-chrome
-        edbi
         restclient
-        powershell
-        ;; esqlite
-        ;; pscv
         helm-ls-git))
 
 (setq daniel-util-excluded-packages '())
